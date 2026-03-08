@@ -7,40 +7,64 @@
 #include <cmath>
 using namespace std;
 
-//set column widths
-const int W1 = 8;
-const double MIN = 1, MAX = 5; //range of 1-5
+const int SIZE = 4; //size of linked list
+const int MIN = 1, MAX = 5; //random double range of 1-5
 
 class Movie {
     private:
     string movieTitle;
-    struct Node {
-        double rating;
-        string review;
-        Node *next;
-    };
+    double rating;
+    string review;
+    //struct Node {
+        //double rating;
+        //string review;
+        //Node *next;
+    //};
     public:
     //setter and getter functions
-    string getMovieTitle() const     {return movieTitle;}      
-    void setMovieTitle(string m)     {movieTitle = m;} 
-    string getRating() const         {return rating;}      
-    void setRating(double t)         {rating = t;} 
-    string getReview() const         {return review;}      
-    void setReview(string r)         {review = r;} 
+    string getMovieTitle() const    {return movieTitle;}      
+    void setMovieTitle(string m)    {movieTitle = m;} 
+    double getRating() const        {return rating;}      
+    void setRating(double t)        {rating = t;} 
+    string getReview() const        {return review;}      
+    void setReview(string r)        {review = r;} 
 };
 
 int main() {
     //declarations
-    srand(time(0));
-    //random number calculation
-    double r1 = rand() % static_cast<int>(MAX - MIN + 1) + MIN; 
-    double r2 = rand() % static_cast<int>(MAX - MIN + 1) + MIN; 
-    double r3 = rand() % static_cast<int>(MAX - MIN + 1) + MIN; 
-    double r4 = rand() % static_cast<int>(MAX - MIN + 1) + MIN; 
-    cout << setprecision(1);
-    
     //vector
-    std::array<Movie, 3> objArray = { Movie(10), Movie(20), Movie(30) };
+    vector<Movie> movies;
+    //random doubles 1-5
+    srand(time(0));
+    double r1 = rand() % (MAX - MIN + 1) + MIN;
+    double r2 = rand() % (MAX - MIN + 1) + MIN;
+    double r3 = rand() % (MAX - MIN + 1) + MIN;
+    double r4 = rand() % (MAX - MIN + 1) + MIN;
+    //container of four Movie objects
+    //Movie 1
+    Movie m1;
+    m1.setMovieTitle("Hello");
+    m1.setRating(r1);
+    m1.setReview("Review");
+    movies.push_back(m1);
+    //Movie 2
+    Movie m2;
+    m2.setMovieTitle("This");
+    m2.setRating(r2);
+    m2.setReview("J");
+    movies.push_back(m2);
+    //Movie 3
+    Movie m3;
+    m3.setMovieTitle("How");
+    m3.setRating(r3);
+    m3.setReview("K");
+    movies.push_back(m3);
+    //Movie 4
+    Movie m4;
+    m4.setMovieTitle("Now");
+    m4.setRating(r4);
+    m4.setReview("L");
+    movies.push_back(m4);
     
     ifstream fin ("input.txt"); //read from input file
     string r;  //temp review comments
@@ -57,19 +81,14 @@ int main() {
     }
     else
         cout << "Input file not found.\n";
-        
+    
     //output vector
     for (auto val : movies) {
-        cout << "\tMovie Title: " << val.getTitle() << endl;
-        cout << "\tMovie Rating: " << val.getRating() << endl;
-        cout << "\tMovie Review: " << val.getReview() << endl;
+        cout << "Movie Title: " << val.getMovieTitle() << endl;
+        cout << "Movie Rating: " << fixed << setprecision(1);
+        cout << val.getRating() << endl;
+        cout << "Movie Review: " << val.getReview() << endl << endl;
     }
- 
-    Movie movie1;
-    Movie movie2;
-    Movie movie3;
-    Movie movie4;
     
     return 0;
 }
-
