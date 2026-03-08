@@ -4,17 +4,16 @@
 #include <iomanip>
 #include <fstream>
 #include <vector>
+#include <cmath>
 using namespace std;
 
 //set column widths
 const int W1 = 8;
-//range of 25-50 for random numbers
-const double MIN = 1, MAX = 5; 
+const double MIN = 1, MAX = 5; //range of 1-5
 
 class Movie {
     private:
     string movieTitle;
-    string review;
     struct Node {
         double rating;
         string review;
@@ -22,26 +21,35 @@ class Movie {
     };
     public:
     //setter and getter functions
+    string getMovieTitle() const     {return movieTitle;}      
+    void setMovieTitle(string m)     {movieTitle = m;} 
+    string getRating() const         {return rating;}      
+    void setRating(double t)         {rating = t;} 
     string getReview() const         {return review;}      
-    void setReview (string r)        {review = r;} 
+    void setReview(string r)         {review = r;} 
 };
 
 int main() {
-    vector<Movie> movies; //vector
+    //declarations
     srand(time(0));
-    int n;
-    //n = rand() % (MAX - MIN + 1) + MIN;
+    //random number calculation
+    double r1 = rand() % static_cast<int>(MAX - MIN + 1) + MIN; 
+    double r2 = rand() % static_cast<int>(MAX - MIN + 1) + MIN; 
+    double r3 = rand() % static_cast<int>(MAX - MIN + 1) + MIN; 
+    double r4 = rand() % static_cast<int>(MAX - MIN + 1) + MIN; 
     cout << setprecision(1);
     
-    ifstream fin ("input.txt"); //read from input file
-    string m;  //temp movie title
+    //vector
+    std::array<Movie, 3> objArray = { Movie(10), Movie(20), Movie(30) };
     
+    ifstream fin ("input.txt"); //read from input file
+    string r;  //temp review comments
     //read from file into vector
     if (fin.good()) {
-        while (getline(fin, m)) {
+        while (getline(fin, r)) {
             //temp Movie object
             Movie tmp;
-            tmp.setReview(m);
+            tmp.setReview(r);
             //push data into vector
             movies.push_back(tmp);
         }
@@ -52,10 +60,11 @@ int main() {
         
     //output vector
     for (auto val : movies) {
-        cout << "Movie Review: " << val.getReview() << endl;
+        cout << "\tMovie Title: " << val.getTitle() << endl;
+        cout << "\tMovie Rating: " << val.getRating() << endl;
+        cout << "\tMovie Review: " << val.getReview() << endl;
     }
  
-    Movie container;
     Movie movie1;
     Movie movie2;
     Movie movie3;
