@@ -3,8 +3,8 @@
 #include <iostream>
 #include <iomanip>
 #include <fstream>
+#include <string> 
 #include <vector>
-#include <string>
 #include <cmath>
 using namespace std;
 
@@ -16,11 +16,11 @@ class Movie {
     string movieTitle;
     double rating;
     string review;
-    //struct Node {
-        //double rating;
-        //string review;
-        //Node *next;
-    //};
+    struct Node {
+        double rating;
+        string review;
+        Node *next;
+    };
     public:
     //setter and getter functions
     string getMovieTitle() const    {return movieTitle;}      
