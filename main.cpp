@@ -6,14 +6,19 @@
 #include <vector>
 using namespace std;
 
+//set column widths
 const int W1 = 8;
+//range of 25-50 for random numbers
+const double MIN = 1, MAX = 5; 
 
 class Movie {
     private:
     string movieTitle;
     string review;
     struct Node {
-        
+        double rating;
+        string review;
+        Node *next;
     };
     public:
     //setter and getter functions
@@ -23,6 +28,10 @@ class Movie {
 
 int main() {
     vector<Movie> movies; //vector
+    srand(time(0));
+    int n;
+    //n = rand() % (MAX - MIN + 1) + MIN;
+    cout << setprecision(1);
     
     ifstream fin ("input.txt"); //read from input file
     string m;  //temp movie title
